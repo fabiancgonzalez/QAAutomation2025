@@ -1,4 +1,6 @@
- // cypress/e2e/registro.cy.js
+// SE REALIZARON CAMBIOS ---NUEVOS TEST NEGATIVOS
+
+// cypress/e2e/registro.cy.js
 /// <reference types="cypress" />
 
 // Opcional: cambiá esta URL si lo corrés contra prod/dev
@@ -305,4 +307,5 @@ describe('Registro de cuenta', () => {
     cy.url().should('include', '/auth/login');
   });
 });
+
 
