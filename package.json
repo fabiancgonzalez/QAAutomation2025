@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "cypress": "^14.5.4"
+  },
+  "devDependencies": {
+    "allure-cypress": "^3.3.3",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "rimraf": "^6.0.1"
+  },
+  "scripts": {
+    "cypress:run": "cypress run",
+    "test:clean": "if exist cypress\\reports rmdir /s /q cypress\\reports",
+    "cypress:report": "npm run test:clean && npm run cypress:run && npm run combine-reports && npm run generate-report",
+    "combine-reports": "mochawesome-merge cypress/reports/*.json > cypress/reports/output.json",
+    "generate-report": "marge cypress/reports/output.json -f report -o cypress/reports",
+  
+   "clean:reports": "rmdir /s /q cypress\\reports && mkdir cypress\\reports\\mochawesome",
+    "pretest": "npm run clean:reports",
+    "test": "cypress run",
+    "posttest": "node cypress/support/generateReport.js"
+  }
+  
+  
+  }
+
+
+}
