@@ -119,7 +119,8 @@ describe('Registro de cuenta', () => {
   });
 
 
-  //----------pruebo fallo  telefono con letras
+  //----------pruebo fallo  telefono con letras------------------------
+ 
     it('falla con número telefónico que contiene letras', () => {
     fillAllValid({ telefono: '35112ABC67' });
     cy.get('[data-cy="btn-registrarse"]').click();
@@ -141,7 +142,8 @@ describe('Registro de cuenta', () => {
 
 
 
-  // --------pruebo fallo DNI ---
+  // --------pruebo fallo DNI ---------------------------------------
+ 
     it('falla con DNI que contiene caracteres especiales', () => {
     fillAllValid({ dni: '123#4567' });
     cy.get('[data-cy="btn-registrarse"]').click();
@@ -159,7 +161,8 @@ describe('Registro de cuenta', () => {
     assertNoRegisterRequest();
   });
 
-  //------------------pruebo fallo  contraseñas ---------
+  //------------------pruebo fallo  contraseñas -----------------------
+ 
   it('falla con contraseñas que no cumplen requisitos mínimos', () => {
     fillAllValid({
       password: '123',
@@ -171,7 +174,7 @@ describe('Registro de cuenta', () => {
   });
 
 
-  //------------pruebo fallo correos  malformados -----
+  //------------pruebo fallo correos  malformados -------------------
 
    it('falla con emails malformados', () => {
     const invalidEmails = [
@@ -194,7 +197,8 @@ describe('Registro de cuenta', () => {
   });
 
 
-  //---------------pruebo el fallo de nombres muy largos --------
+  //---------------pruebo el fallo de nombres muy largos -------------------
+ 
     it('falla con nombres extremadamente largos', () => {
     const longName = 'a'.repeat(256);
     fillAllValid({
@@ -207,7 +211,8 @@ describe('Registro de cuenta', () => {
 
 
 
-  //--------------pruebo fallo  Fecha Nacimiento futura----
+  //--------------pruebo fallo  Fecha Nacimiento futura---------------------------
+ 
     it('falla con fecha de nacimiento futura', () => {
     fillAllValid({
       fechaNac: { d: 1, m: 1, y: 2025 }
@@ -236,8 +241,8 @@ describe('Registro de cuenta', () => {
 
 
 
-  //-----------------------pruebo fallo   si registro usuario ya existente -----
-
+  //-----------------------pruebo fallo   si registro usuario ya existente ---------------------
+ 
     it('falla al intentar registrar un usuario ya existente', () => {
     cy.intercept('POST', 'api/backend/register/register-user', {
       statusCode: 409,
@@ -256,7 +261,8 @@ describe('Registro de cuenta', () => {
     cy.contains('Usuario ya registrado').should('be.visible');
   });
 
-  //-------------------------fallo  prueba  si el servidor no responde 
+  //-------------------------fallo  prueba  si el servidor no responde -----------------------
+ 
   it('falla cuando el servidor no responde', () => {
     cy.intercept('POST', 'api/backend/register/register-user', {
       forceNetworkError: true
@@ -267,7 +273,8 @@ describe('Registro de cuenta', () => {
     cy.contains('Error de conexión').should('be.visible');
   });
 
-  //-------------------pruebo fallo  si envio caracteres especiales en todos los campos -----
+  //-------------------pruebo fallo  si envio caracteres especiales en todos los campos -------------
+ 
    it('falla al intentar enviar caracteres especiales en todos los campos', () => {
     fillAllValid({
       nombres: '!@#$%^&*()',
@@ -298,3 +305,4 @@ describe('Registro de cuenta', () => {
     cy.url().should('include', '/auth/login');
   });
 });
+
